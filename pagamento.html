@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formas de Pagamento</title>
+    <link rel="stylesheet" href="stylespagamento.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Escolha sua Forma de Pagamento</h1>
+        </header>
+        
+        <!-- Abas de Pagamento -->
+        <div class="tabs">
+            <div class="tab" id="boletoTab" onclick="openTab('boleto')">
+                <img src="imagens/cartão.png" alt="Ícone de Boleto">
+                <p>Boleto</p>
+            </div>
+            <div class="tab" id="creditoTab" onclick="openTab('credito')">
+                <img src="imagens/boleto.png" alt="Ícone de Cartão de Crédito">
+                <p>Cartão de Crédito</p>
+            </div>
+            <div class="tab" id="pixTab" onclick="openTab('pix')">
+                <img src="imagens/pix.png" alt="Ícone de Pix">
+                <p>Pix</p>
+            </div>
+        </div>
+
+        <!-- Conteúdo das Abas -->
+        <div id="boleto" class="tab-content">
+            <h2>Pagamento via Boleto</h2>
+            <p>Escolha o Boleto para gerar seu pagamento de forma rápida e segura.</p>
+            <a href="https://mpago.la/2p5KrEt" class="button" target="_blank">Pagar com Boleto</a>
+        </div>
+
+        <div id="credito" class="tab-content">
+            <h2>Pagamento com Cartão de Crédito</h2>
+            <p>Para pagar com seu cartão de crédito, clique no botão abaixo.</p>
+            <a href="cartão.html" class="button" target="_blank">Pagar com Boleto</a>
+        </div>
+
+        <div id="pix" class="tab-content">
+            <h2>Pagamento via Pix</h2>
+            <p>Escolha o Pix para pagar de forma simples e rápida.</p>
+            <button id="pixButton" class="button">Pagar com Pix</button>
+        </div>
+
+        <!-- Modal do QR Code -->
+        <div id="qrCodeModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close" id="closeModal">&times;</span>
+                <h2>Pagamento via Pix</h2>
+                <canvas id="qrCodeCanvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para alternar entre as abas
+        function openTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.style.display = 'none';
+            });
+            document.getElementById(tabName).style.display = 'block';
+
+            const tabLinks = document.querySelectorAll('.tab');
+            tabLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            document.getElementById(tabName + 'Tab').classList.add('active');
+        }
+
+        // Exibe a primeira aba por padrão
+        openTab('boleto');
+
+        // Pix Button: Redireciona para o pagamento com Pix
+        document.getElementById('pixButton').addEventListener('click', function() {
+            window.location.href = 'https://mpago.la/2p5KrEt'; // Redireciona para o link de pagamento Pix
+        });
+
+        // Credit Button: Redireciona para a página de pagamento com Cartão de Crédito
+        document.getElementById('creditButton').addEventListener('click', function() {
+            window.location.href = 'cartao.html'; // Redireciona para a página cartao.html
+        });
+
+        // Fechar o modal do QR Code
+        document.getElementById('closeModal').addEventListener('click', function() {
+            document.getElementById('qrCodeModal').classList.add('hidden');
+        });
+    </script>
+</body>
+</html>
